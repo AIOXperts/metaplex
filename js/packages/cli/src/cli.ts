@@ -241,18 +241,18 @@ program
     },
   )
   .option(
-    '-u, --url',
+    '-u, --url <url>',
     'Solana cluster url',
     'https://api.mainnet-beta.solana.com/',
   )
   .option('-k, --keypair <path>', 'Solana wallet')
   // .argument('[second]', 'integer argument', (val) => parseInt(val), 1000)
-  .option('-s, --start-with', 'Image index to start with', '0')
-  .option('-n, --number', 'Number of images to upload', '10000')
+  .option('-s, --start-with <n>', 'Image index to start with', '0')
+  .option('-n, --number <n>', 'Number of images to upload', '10000')
   .option('-c, --cache-name <path>', 'Cache file name')
   .action(async (files: string[], options, cmd) => {
     const extension = '.png';
-    const { startWith, keypair } = cmd.opts();
+    const { startWith, keypair, number, url } = cmd.opts();
     const cacheName = program.getOptionValue('cacheName') || 'temp';
     const cachePath = path.join(CACHE_PATH, cacheName);
     const savedContent = fs.existsSync(cachePath)
@@ -303,9 +303,7 @@ program
     // const baseCost = fetch(``);
     // const increment = fetch(``);
 
-    const solConnection = new anchor.web3.Connection(
-      `https://api.${ENV}.solana.com/`,
-    );
+    const solConnection = new anchor.web3.Connection(url);
 
     const walletWrapper = new anchor.Wallet(walletKey);
     const provider = new anchor.Provider(solConnection, walletWrapper, {
@@ -557,7 +555,7 @@ program
     const { keypair } = cmd.opts();
     const solPriceStr = cmd.getOptionValue('price') || '1';
 
-    const lamports = parseInt(solPriceStr) * LAMPORTS_PER_SOL;
+    const lamports = parseFloat(solPriceStr) * LAMPORTS_PER_SOL;
 
     const cacheName = program.getOptionValue('cacheName') || 'temp';
     const cachePath = path.join(CACHE_PATH, cacheName);
@@ -615,7 +613,7 @@ program
 
     const { keypair } = cmd.opts();
     const solPriceStr = program.getOptionValue('price') || '1';
-    const lamports = parseInt(solPriceStr) * LAMPORTS_PER_SOL;
+    const lamports = parseFloat(solPriceStr) * LAMPORTS_PER_SOL;
 
     const cacheName = program.getOptionValue('cacheName') || 'temp';
     const cachePath = path.join(CACHE_PATH, cacheName);

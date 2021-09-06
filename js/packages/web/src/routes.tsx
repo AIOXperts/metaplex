@@ -13,6 +13,7 @@ import {
 } from './views';
 import { AdminView } from './views/admin';
 import { BillingView } from './views/auction/billing';
+import { CandyMachineView } from './views/candymachine';
 
 export function Routes() {
   return (
@@ -53,6 +54,11 @@ export function Routes() {
               exact
               path="/auction/:id/billing"
               component={() => <BillingView />}
+            />
+            <Route 
+              exact 
+              path="/tipsyturtlesnft" 
+              component={() => <CandyMachineView />} 
             />
             <Route path="/" component={() => <HomeView />} />
           </Switch>
