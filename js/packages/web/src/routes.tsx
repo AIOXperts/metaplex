@@ -57,7 +57,7 @@ export function Routes() {
             />
             <Route 
               exact 
-              path="/tipsyturtlesnft" 
+              path="/candymachine/:id" 
               component={() => <CandyMachineView />} 
             />
             <Route path="/" component={() => <HomeView />} />
