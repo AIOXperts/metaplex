@@ -97,7 +97,7 @@ program
     if (!cacheContent.program) {
       cacheContent.program = {};
     }
-
+    console.log("cacheContent", cacheContent);
     let existingInCache = [];
     if (!cacheContent.items) {
       cacheContent.items = {};
@@ -123,14 +123,16 @@ program
 
     const images = newFiles.filter(val => path.extname(val) === EXTENSION_PNG);
     const SIZE = images.length;
-
+    //console.log(SIZE);
     const walletKeyPair = loadWalletKey(keypair);
+    //console.log(walletKeyPair);
     const anchorProgram = await loadAnchorProgram(walletKeyPair, env);
-
+    //console.log(env)
     let config = cacheContent.program.config
       ? new PublicKey(cacheContent.program.config)
       : undefined;
-
+    console.log("cacheContent", cacheContent);
+    
     for (let i = 0; i < SIZE; i++) {
       const image = images[i];
       const imageName = path.basename(image);

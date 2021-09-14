@@ -134,6 +134,7 @@ export async function loadAnchorProgram(walletKeyPair: Keypair, env: string) {
   const solConnection = new anchor.web3.Connection(
     `https://api.${env}.solana.com/`,
   );
+  console.log("conn:", solConnection)
   const walletWrapper = new anchor.Wallet(walletKeyPair);
   const provider = new anchor.Provider(solConnection, walletWrapper, {
     preflightCommitment: 'recent',
